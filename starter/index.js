@@ -86,3 +86,52 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+// Heading
+console.log("Financial Analysis")
+console.log("----------------------------")
+// number of months
+
+var Months = finances.length;
+console.log("Total months: " + Months);
+  
+  var earningsArray = finances.map((el) => el[1]);
+  
+//   profit 
+  var profitMonths = finances.filter((el) => el[1] > 0);
+  var salesOnProfitMonths = profitMonths
+    .map((el) => el[1])
+    .reduce((accVal, curVal) => accVal + curVal, 0);
+  
+    // the average of all total and losses
+  var avgOfProfitAndLoss =
+    earningsArray.reduce((accVal, curVal) => accVal + curVal, 0) / finances.length; 
+  
+  var maxMonth = {
+    monthName: '',
+    profit: 0,
+  };
+  
+  var minMonth = {
+    monthName: '',
+    profit: 0,
+  };
+//   maxim of ptofit
+  finances.forEach((month) => {
+    if (month[1] > maxMonth.profit) {
+      maxMonth.monthName = month[0];
+      maxMonth.profit = month[1];
+    }
+//   minim of profit
+    if (month[1] < minMonth.profit) {
+      minMonth.monthName = month[0];
+      minMonth.profit = month[1];
+    }
+  
+    return { maxMonth, minMonth };
+  });
+//   print 
+  console.log('Total: ', salesOnProfitMonths);
+  console.log('Average  Change : ', avgOfProfitAndLoss);
+  console.log('Greatest Increase in Profits : ', maxMonth);
+  console.log('reatest Decrease in Profits : ', minMonth);
